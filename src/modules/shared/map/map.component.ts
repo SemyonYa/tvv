@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { Coordinates, MapCameraPosition, MapObject, MapService } from '../../../services/map.service';
+import { Coordinates, MapCameraPosition, MapObject, MapService, Region } from '../../../services/map.service';
 
 @Component({
   selector: 'tvv-map',
@@ -8,6 +8,7 @@ import { Coordinates, MapCameraPosition, MapObject, MapService } from '../../../
 })
 export class MapComponent implements OnInit, AfterViewInit {
   @Output() onClick = new EventEmitter<Coordinates>();
+  @Output() onRegionClick = new EventEmitter<Region>();
   @ViewChild('map') map: ElementRef<SVGElement>;
 
   renderedObjects: any[];
@@ -33,10 +34,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.viewboxHeight = rect.height;
     this.realWidth = this.map.nativeElement['clientWidth']
     this.realHeight = this.map.nativeElement['clientHeight']
-    // console.log('width: ', this.viewboxWidth, this.realWidth / this.viewboxWidth);
-    // console.log('height: ', this.viewboxHeight, this.realHeight / this.viewboxHeight);
-    // console.log('real width: ', this.realWidth);
-    // console.log('real height: ', this.realHeight);
 
     this.mapService.objects$
       .subscribe(
@@ -61,6 +58,12 @@ export class MapComponent implements OnInit, AfterViewInit {
             this.renderer.setStyle(this.map.nativeElement, 'transform', `scale(${item.scale}) translateX(${item.xPercent}%) translateY(${item.yPercent}%)`);
         }
       );
+
+    document.querySelectorAll('g.group').forEach(g => {
+      g.addEventListener('click', () => {
+        this.onRegionClick.emit(g['dataset'].id as Region);
+      });
+    })
   }
 
   mapClick(e: PointerEvent) {
@@ -68,7 +71,7 @@ export class MapComponent implements OnInit, AfterViewInit {
     const coords: Coordinates = { x: offsetX * this.viewboxWidth / this.realWidth, y: offsetY * this.viewboxHeight / this.realHeight };
     this.onClick.emit(coords);
 
-    this.renderObject({ id: 12, title: 'On click object', coords, type: 'capital' });
+    // this.renderObject({ id: 12, title: 'On click object', coords, type: 'capital' });
   }
 
   renderObject(obj: MapObject): any {
@@ -101,15 +104,6 @@ export class MapComponent implements OnInit, AfterViewInit {
 
     this.renderer.setAttribute(gElem, 'transform', `matrix(1 0 0 1 ${obj.coords.x} ${obj.coords.y})`);
     this.renderer.appendChild(this.map.nativeElement, gElem);
-
-    // const textElem = this.renderer.createElement('text', 'svg');
-    // const innerText = this.renderer.createText(obj.title);
-    // this.renderer.appendChild(textElem, innerText);
-    // this.renderer.addClass(textElem, 'st1');
-    // this.renderer.setAttribute(textElem, 'transform', `matrix(1 0 0 1 ${obj.coords.x} ${obj.coords.y})`);
-    // this.renderer.appendChild(this.map.nativeElement, textElem);
-
-    // this.renderedObjects.push(textElem);
   }
 
   clear() {

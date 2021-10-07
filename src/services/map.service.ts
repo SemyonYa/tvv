@@ -79,10 +79,8 @@ export class MapService {
   moveCameraTo(region: Region = null) {
     console.log(region);
     if (region) {
-      console.log(region);
       this.cameraPosition$.next(this.regions[region.toString()]);
     } else {
-      console.log(region);
       this.cameraPosition$.next({ scale: 1, xPercent: 0, yPercent: 0 });
     }
 

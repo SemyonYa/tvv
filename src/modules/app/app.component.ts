@@ -2,11 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { DataService } from '../../services/data.service';
 import { MapService, Region } from '../../services/map.service';
+import { titleAnimation } from '../../animations/title.animation';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  animations: [titleAnimation]
 })
 export class AppComponent implements OnInit {
   title = 'tvv';
@@ -39,9 +41,12 @@ export class AppComponent implements OnInit {
       );
   }
 
-  animateMapTo() {
-    this.currentRegion = this.currentRegion == 'Ярославская область' ? null : 'Ярославская область';
-    this.mapService.moveCameraTo(this.currentRegion);
+  animateMapTo(region: Region) {
+    this.mapService.moveCameraTo(region);
+    this.currentRegion = null;
+    setTimeout(() => {
+      this.currentRegion = region;
+    }, 700);
     // this.mapService.cameraPosition$.next({ scale: 3.5, xPercent: 50, yPercent: 51 });
   }
 }

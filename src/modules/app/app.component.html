@@ -1,12 +1,13 @@
 <div class="wrap">
 
 
-  <tvv-map></tvv-map>
+  <tvv-map (onRegionClick)="animateMapTo($event)"></tvv-map>
 
-  <h1 (click)="animateMapTo()">Карта благотворительности</h1>
+  <h1>Карта благотворительности</h1>
 
+  <h2 *ngIf="currentRegion" @titleAnimation>{{currentRegion}}</h2>
   <main>
     <router-outlet></router-outlet>
   </main>
 
-</div>
+</div> 

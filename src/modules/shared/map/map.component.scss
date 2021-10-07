@@ -5,6 +5,7 @@ svg {
 }
 
 g.group {
+  cursor: pointer;
 
   path {
     fill-rule: evenodd;
@@ -39,16 +40,14 @@ g.group {
     circle {}
 
     text {
-      fill: var(--color-bg);
+      // fill: var(--color-bg);
     }
   }
 
   &.active {
 
     path {
-      // transition: fill .3s;
       fill: var(--color-grey-light);
-      // stroke: var(--color-blue);
     }
 
     circle {}
@@ -58,9 +57,7 @@ g.group {
 
   &.inactive {
     path {
-      // transition: fill .3s .3s;
       fill: var(--color-bg);
-      // stroke: var(--color-grey-light);
     }
 
     circle {}
