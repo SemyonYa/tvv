@@ -1,0 +1,15 @@
+<ng-container *ngIf="!error">
+  <ng-container *ngIf="list">
+    <div *ngIf="list.length > 0" class="list">
+      <ng-content></ng-content>
+    </div>
+
+    <p *ngIf="list.length == 0">Список пуст</p>
+  </ng-container>
+
+  <div *ngIf="!list" class="in-progress">
+    <i-in-progress size="48px"> </i-in-progress>
+  </div>
+</ng-container>
+
+<i-error *ngIf="error" [text]="error"></i-error>

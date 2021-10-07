@@ -1,13 +1,24 @@
-<div class="wrap">
+<router-outlet></router-outlet>
 
 
-  <tvv-map (onRegionClick)="animateMapTo($event)"></tvv-map>
+<!-- <div class="wrap">
+
+
+  <tvv-map (onRegionClick)="selectRegion($event)"></tvv-map>
 
   <h1>Карта благотворительности</h1>
 
-  <h2 *ngIf="currentRegion" @titleAnimation>{{currentRegion}}</h2>
+  <div *ngIf="currentRegion" class="row close-region" (click)="selectRegion()" @titleAnimation>
+    <span>{{currentRegion}}</span>
+    <img src="/assets/icons/close.svg" alt="CLOSE">
+  </div>
+
   <main>
     <router-outlet></router-outlet>
   </main>
 
-</div> 
+  <a class="cab-link" [routerLink]="['/cab']">
+    <img src="/assets/icons/cog.svg" alt="SETTINGS">
+  </a>
+
+</div> -->

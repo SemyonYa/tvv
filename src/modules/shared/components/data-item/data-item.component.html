@@ -1,0 +1,11 @@
+<ng-container *ngIf="!error">
+  <ng-container *ngIf="item">
+    <ng-content></ng-content>
+  </ng-container>
+
+  <div *ngIf="!item" class="in-progress">
+    <i-in-progress size="48px"> </i-in-progress>
+  </div>
+</ng-container>
+
+<i-error *ngIf="error" [text]="error"></i-error>

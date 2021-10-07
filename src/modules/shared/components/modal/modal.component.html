@@ -1,0 +1,12 @@
+<div id="cab-i-modal-back" class="back" (click)="backClick($event)">
+  <div class="modal-body" @pageAnimation>
+    <div class="close">
+      <img src="/assets/icons/close.svg" (click)="cancel()" alt="CLOSE">
+    </div>
+    <ng-content></ng-content>
+    <div class="buttons">
+      <button class="danger" type="button" (click)="cancel()">Cancel</button>
+      <button class="success" type="button" (click)="ok()">Ok</button>
+    </div>
+  </div>
+</div>

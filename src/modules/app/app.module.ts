@@ -8,11 +8,15 @@ import { SharedModule } from '../shared/shared.module';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
+import { RegionComponent } from './pages/region/region.component';
+import { HelloComponent } from './pages/hello/hello.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    RegionComponent,
+    HelloComponent
   ],
   imports: [
     BrowserModule,

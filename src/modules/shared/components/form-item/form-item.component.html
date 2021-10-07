@@ -1,0 +1,6 @@
+<div class="wrap">
+    <ng-content></ng-content>
+    <i-collapsible [expanded]="form.controls[control].invalid && form.controls[control].touched">
+        <p class="error">Invalid field</p>
+    </i-collapsible>
+</div>

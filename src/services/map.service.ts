@@ -6,7 +6,8 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class MapService {
   objects$ = new BehaviorSubject<MapObject[]>(null);
-  cameraPosition$ = new BehaviorSubject<MapCameraPosition>(null);
+  selectedRegion$ = new BehaviorSubject<SelectedRegion>(null);
+  // region$ = new BehaviorSubject<Region>(null);
 
   regions: { [key: string]: MapCameraPosition } = {
     'Псковская область': {
@@ -76,32 +77,34 @@ export class MapService {
     }
   };
 
-  moveCameraTo(region: Region = null) {
-    console.log(region);
-    if (region) {
-      this.cameraPosition$.next(this.regions[region.toString()]);
-    } else {
-      this.cameraPosition$.next({ scale: 1, xPercent: 0, yPercent: 0 });
+  selectRegion(region: Region = null) {
+    if (this.selectedRegion$.value?.title != region) {
+      if (region) {
+        this.selectedRegion$.next({ title: region, cameraPosition: this.regions[region.toString()] });
+      } else {
+        this.selectedRegion$.next({ title: null, cameraPosition: { scale: 1, xPercent: 0, yPercent: 0 } });
+      }
+
+      if (region) {
+        document.querySelectorAll('g.group').forEach(g => {
+          if (g['dataset'].id == region) {
+            g.classList.remove('inactive');
+            g.classList.add('active');
+          } else {
+            g.classList.remove('active');
+            g.classList.add('inactive');
+          }
+        });
+      } else {
+        document.querySelectorAll('g.group').forEach(g => {
+          g.classList.remove('active', 'inactive');
+        });
+      }
     }
+  }
 
-    if (region) {
-      document.querySelectorAll('g.group').forEach(g => {
-        console.log(region, g['dataset'].id, g['dataset'].id == region);
-        if (g['dataset'].id == region) {
-          g.classList.remove('inactive');
-          g.classList.add('active');
-        } else {
-          g.classList.remove('active');
-          g.classList.add('inactive');
-        }
-      });
-    } else {
-      document.querySelectorAll('g.group').forEach(g => {
-        g.classList.remove('active', 'inactive');
-      });
-    }
-
-
+  setObjects(objects: MapObject[]) {
+    this.objects$.next(objects);
   }
 }
 
@@ -125,4 +128,9 @@ export interface MapCameraPosition {
   xPercent: number;
   yPercent: number;
   scale: number;
+}
+
+export interface SelectedRegion {
+  title: Region;
+  cameraPosition: MapCameraPosition;
 }

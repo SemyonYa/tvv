@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { Coordinates, MapCameraPosition, MapObject, MapService, Region } from '../../../services/map.service';
+import { Coordinates, MapCameraPosition, MapObject, MapService, Region } from '../../../../services/map.service';
 
 @Component({
   selector: 'tvv-map',
@@ -28,7 +28,6 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-    console.log(this.map.nativeElement);
     const rect = (this.map.nativeElement['viewBox'] as SVGAnimatedRect).animVal;
     this.viewboxWidth = rect.width;
     this.viewboxHeight = rect.height;
@@ -51,11 +50,12 @@ export class MapComponent implements OnInit, AfterViewInit {
         }
       );
 
-    this.mapService.cameraPosition$
+    this.mapService.selectedRegion$
       .subscribe(
         item => {
-          if (item)
-            this.renderer.setStyle(this.map.nativeElement, 'transform', `scale(${item.scale}) translateX(${item.xPercent}%) translateY(${item.yPercent}%)`);
+          if (item) {
+            this.renderer.setStyle(this.map.nativeElement, 'transform', `scale(${item.cameraPosition.scale}) translateX(${item.cameraPosition.xPercent}%) translateY(${item.cameraPosition.yPercent}%)`);
+          }
         }
       );
 

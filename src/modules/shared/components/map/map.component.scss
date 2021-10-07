@@ -11,7 +11,7 @@ g.group {
     fill-rule: evenodd;
     clip-rule: evenodd;
     fill: var(--color-grey-light);
-    stroke: var(--color-bg);
+    stroke: var(--color-back);
     stroke-linecap: round;
     stroke-linejoin: round;
     stroke-miterlimit: 10;
@@ -40,7 +40,7 @@ g.group {
     circle {}
 
     text {
-      // fill: var(--color-bg);
+      // fill: var(--color-back);
     }
   }
 
@@ -57,7 +57,7 @@ g.group {
 
   &.inactive {
     path {
-      fill: var(--color-bg);
+      fill: var(--color-back);
     }
 
     circle {}

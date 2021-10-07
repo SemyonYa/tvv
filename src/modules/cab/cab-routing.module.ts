@@ -1,21 +1,17 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CabComponent } from './cab.component';
+import { RegionsComponent } from './pages/regions/regions.component';
 
 const routes: Routes = [
   // CAB
-  { path: '', redirectTo: 'orders', pathMatch: 'full' },
+  { path: '', redirectTo: 'regions', pathMatch: 'full' },
   {
-    // path: 'orders', component: CabComponent, children: [
-    //   { path: '', component: CabHomeComponent, pathMatch: 'full' },
-    //   { path: 'contracts', component: CabContractsComponent },
-    //   { path: 'cart', component: CabCartComponent },
-    //   {
-    //     path: 'history', component: CabHistoryComponent, children: [
-    //       { path: '', component: CabHistoryAllComponent, pathMatch: 'full' },
-    //       { path: 'active', component: CabHistoryActiveComponent },
-    //     ]
-    //   }
-    // ]
+    path: 'regions', component: CabComponent,
+    children: [
+      { path: '', component: RegionsComponent, pathMatch: 'full' },
+      // { path: ':regionId', component: CabContractsComponent },
+    ]
   },
 ];
 

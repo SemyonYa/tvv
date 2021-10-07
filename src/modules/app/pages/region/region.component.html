@@ -1,0 +1,9 @@
+<div *ngIf="selectedRegion" class="page-wrap" @titleAnimation>
+    <h2>{{selectedRegion?.title}}</h2>
+
+    <ul *ngIf="objects">
+        <li *ngFor="let obj of objects">{{obj.title}}</li>
+    </ul>
+
+    <div *ngIf="!objects">Loading...</div>
+</div>

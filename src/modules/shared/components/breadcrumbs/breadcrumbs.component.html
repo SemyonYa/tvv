@@ -1,0 +1,14 @@
+<i-collapsible [expanded]="!!items && !!(items.length > 0)">
+
+  <div class="breadcrumbs">
+    <a [routerLink]="[ '/' ]" class="link">
+      Главная
+    </a>
+    <ng-container *ngFor="let item of items; let last = last">
+      <span class="slash">/</span>
+      <a *ngIf="!last" [routerLink]="[ '/' + item.route]" class="link">{{item.title}}</a>
+      <span *ngIf="last">{{item.title}}</span>
+    </ng-container>
+  </div>
+
+</i-collapsible>

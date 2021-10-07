@@ -1,0 +1,38 @@
+* {
+    --toggle-height: 30px;
+}
+
+.wrap {
+    position: relative;
+    width: calc(var(--toggle-height) * 1.8);
+    height: var(--toggle-height);
+    cursor: pointer;
+
+    .line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: calc(var(--toggle-height) / 2);
+        background-color: white;
+        border-radius: calc(var(--toggle-height) / 4);
+        margin: calc(var(--toggle-height) / 4) 0;
+        box-shadow: inset 0 0 8px 0 rgba(0, 0, 0, 0.12);
+    }
+
+    .circle {
+        position: absolute;
+        width: var(--toggle-height);
+        height: var(--toggle-height);
+        left: 0;
+        background-color: white;
+        border-radius: calc(var(--toggle-height) / 2);
+        box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.12);
+        transition: 0.5s;
+
+        &.on {
+            left: calc(var(--toggle-height) * 0.8);
+            background-color: var(--color-primary);
+            box-shadow: 0 0 8px 0 var(--color-primary);
+        }
+    }
+}

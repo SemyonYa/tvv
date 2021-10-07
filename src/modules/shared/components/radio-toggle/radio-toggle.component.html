@@ -1,0 +1,5 @@
+<div class="wrap">
+  <div [ngClass]="{'item': true, 'active': item == selectedItem}" *ngFor="let item of items" (click)="select(item)">
+    {{item.name}}
+  </div>
+</div>

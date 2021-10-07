@@ -1,0 +1,7 @@
+<div class="wrap">
+  <img src="/assets/icons/bug.svg" alt="ERROR">
+  <ng-container *ngIf="text">
+    {{text}}
+  </ng-container>
+  <ng-container *ngIf="!text">Что-то пошло не так</ng-container>
+</div>
