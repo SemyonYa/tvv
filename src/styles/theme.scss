@@ -1,0 +1,40 @@
+body {
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  margin: 0;
+  overflow: hidden;
+  font-family: "Montserrat", sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.page-wrap {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-bg);
+  border-radius: 12px;
+  box-shadow: 0 0 24px 0 rgba(0, 0, 0, .06);
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  color: var(--color-blue);
+}

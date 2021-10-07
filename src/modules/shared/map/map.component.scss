@@ -1,0 +1,70 @@
+svg {
+  max-width: 100%;
+  max-height: 100%;
+  transition: .7s ease-in-out;
+}
+
+g.group {
+
+  path {
+    fill-rule: evenodd;
+    clip-rule: evenodd;
+    fill: var(--color-grey-light);
+    stroke: var(--color-bg);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-miterlimit: 10;
+    transition: 1s;
+  }
+
+
+  circle {
+    fill-rule: evenodd;
+    clip-rule: evenodd;
+    fill: #FF3131;
+    transition: .3s;
+  }
+
+  text {
+    font-size: 11px;
+    fill: var(--color-grey-text);
+    transition: .3s;
+  }
+
+  &:hover {
+    path {
+      fill: var(--color-grey);
+    }
+
+    circle {}
+
+    text {
+      fill: var(--color-bg);
+    }
+  }
+
+  &.active {
+
+    path {
+      // transition: fill .3s;
+      fill: var(--color-grey-light);
+      // stroke: var(--color-blue);
+    }
+
+    circle {}
+
+    text {}
+  }
+
+  &.inactive {
+    path {
+      // transition: fill .3s .3s;
+      fill: var(--color-bg);
+      // stroke: var(--color-grey-light);
+    }
+
+    circle {}
+
+    text {}
+  }
+}

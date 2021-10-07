@@ -1,0 +1,15 @@
+<div class="page-wrap">
+  <h2>Регионы</h2>
+
+  <div class="home row" (click)="moveCameraTo()">
+    <img src="/assets/icons/home.svg" alt="HOME">
+    Домой
+  </div>
+
+  <ol>
+    <li *ngFor="let item of regions" [ngClass]="{'active': item === currentRegion}" (click)="moveCameraTo(item)">
+      {{item}}</li>
+  </ol>
+
+
+</div>
