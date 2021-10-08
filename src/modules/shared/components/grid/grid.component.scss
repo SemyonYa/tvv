@@ -1,0 +1,26 @@
+.wrap {
+  width: 100%;
+  overflow-x: auto;
+
+  .table {
+    display: flex;
+    flex-direction: column;
+
+    &-head {
+      display: flex;
+    }
+
+    &-body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &-cell {
+      flex: 1 0 100px;
+
+      &:first-child {
+        flex: 1 0 50px;
+      }
+    }
+  }
+}

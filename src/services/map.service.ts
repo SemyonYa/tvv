@@ -115,7 +115,7 @@ export class MapObject {
   coords: Coordinates;
 }
 
-export type MapObjectType = 'capital' | 'city' | 'place' | 'object';
+export type MapObjectType = 'capital' | 'city' | 'place' | 'project';
 
 export type Region = 'Псковская область' | 'Орловская область' | 'Калужская область' | 'Тульская область' | 'Москва и Московская область' | 'Рязанская область' | 'Ярославская область' | 'Владимирская область' | 'Ивановская область' | 'Нижегородская область' | 'Республика Чувашия' | 'Республика Марий Эл' | 'Кировская область';
 

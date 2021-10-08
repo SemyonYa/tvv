@@ -1,0 +1,11 @@
+.wrap {
+  display: flex;
+  justify-content: center;
+
+  .container {
+    border-bottom-left-radius: 16px;
+    border-bottom-right-radius: 16px;
+    box-shadow: 0 0 24px 1px rgba(0, 0, 0, .06);
+    padding-bottom: 80px;
+  }
+}

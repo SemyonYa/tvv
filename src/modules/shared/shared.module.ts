@@ -12,6 +12,8 @@ import { DataItemComponent } from './components/data-item/data-item.component';
 import { DropDownComponent } from './components/drop-down/drop-down.component';
 import { ErrorComponent } from './components/error/error.component';
 import { FormItemComponent } from './components/form-item/form-item.component';
+import { GridComponent } from './components/grid/grid.component';
+import { GridRowComponent } from './components/grid/grid-row/grid-row.component';
 import { InProgressComponent } from './components/in-progress/in-progress.component';
 import { ModalComponent } from './components/modal/modal.component';
 import { RadioToggleComponent } from './components/radio-toggle/radio-toggle.component';
@@ -29,6 +31,8 @@ import { ToggleComponent } from './components/toggle/toggle.component';
     DropDownComponent,
     ErrorComponent,
     FormItemComponent,
+    GridComponent,
+    GridRowComponent,
     InProgressComponent,
     ModalComponent,
     RadioToggleComponent,
@@ -55,6 +59,8 @@ import { ToggleComponent } from './components/toggle/toggle.component';
     DropDownComponent,
     ErrorComponent,
     FormItemComponent,
+    GridComponent,
+    GridRowComponent,
     InProgressComponent,
     ModalComponent,
     RadioToggleComponent,

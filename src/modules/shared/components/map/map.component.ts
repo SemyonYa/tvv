@@ -94,7 +94,7 @@ export class MapComponent implements OnInit, AfterViewInit {
 
         break;
 
-      case 'object':
+      case 'project':
 
         break;
 

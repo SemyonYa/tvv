@@ -1,0 +1,20 @@
+<div class="wrap">
+  <div class="table">
+    <div *ngIf="items.length > 0;else emptyList" class="table-head">
+      <div *ngFor="let title of titles" class="table-cell">
+        {{title}}
+      </div>
+      <div *ngIf="withEdit || withDelete" class="table-cell actions"></div>
+    </div>
+    <div class="table-body">
+      <i-grid-row *ngFor="let item of items" [item]="item" [withEdit]="withEdit" [withDelete]="withDelete"
+        [fields]="fields" (onEdit)="editItem($event)" (onDelete)="deleteItem($event)"></i-grid-row>
+    </div>
+  </div>
+</div>
+
+<ng-template #emptyList>
+  <div class="empty-list">
+    Empty list
+  </div>
+</ng-template>

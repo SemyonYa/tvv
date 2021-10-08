@@ -1,0 +1,13 @@
+<div class="wrap col">
+  <h3>{{title}}</h3>
+
+  <i-data [list]="regions" [error]="error">
+    <ol class="list">
+      <li *ngFor="let region of regions">
+        <a [routerLink]="['/cab/regions/' + region]">
+          {{region}}
+        </a>
+      </li>
+    </ol>
+  </i-data>
+</div>

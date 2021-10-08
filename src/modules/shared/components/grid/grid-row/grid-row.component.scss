@@ -1,0 +1,13 @@
+.table {
+  &-body-row {
+    display: flex;
+  }
+
+  &-cell {
+    flex: 1 0 100px;
+
+    &:first-child {
+      flex: 1 0 50px;
+    }
+  }
+}

@@ -1,8 +1,8 @@
 <i-collapsible [expanded]="!!items && !!(items.length > 0)">
 
   <div class="breadcrumbs">
-    <a [routerLink]="[ '/' ]" class="link">
-      Главная
+    <a [routerLink]="[ '/cab' ]" class="link">
+      Регионы
     </a>
     <ng-container *ngFor="let item of items; let last = last">
       <span class="slash">/</span>

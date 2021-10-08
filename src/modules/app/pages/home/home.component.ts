@@ -59,21 +59,4 @@ export class HomeComponent implements OnInit {
       this.router.navigateByUrl('/');
     }
   }
-
-  // regions: string[] = [];
-  // currentRegion: Region;
-
-  // constructor(
-  //   private mapService: MapService
-  // ) { }
-
-  // ngOnInit(): void {
-  //   for (let key in this.mapService.regions) {
-  //     this.regions.push(key);
-  //   }
-  // }
-
-  // moveCameraTo(item: Region = null) {
-  //   this.mapService.selectRegion(item);
-  // }
 }

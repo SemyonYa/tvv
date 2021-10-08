@@ -1,0 +1,23 @@
+<div class="col" @titleAnimation>
+
+  <button [routerLink]="['/cab/regions/' + region + '/add']" type="button" class="add success">
+    <img src="/assets/icons/plus-white.svg" alt="ADD">
+    Добавить населенный пункт
+  </button>
+
+  <i-data [list]="ctors">
+    <div *ngIf="ctors" class="col">
+      <i-search-input (onChange)="search($event)"></i-search-input>
+      <i-grid *ngIf="filteredCtors" [items]="filteredCtors" [titles]="titles" [withEdit]="true" [withDelete]="true"
+        [fields]="fields" (onEditItem)="editCtor($event)" (onDeleteItem)="onDelete($event)"></i-grid>
+    </div>
+  </i-data>
+
+</div>
+
+
+<!-- MODAL -->
+<i-modal *ngIf="ctorForDelete" (onCancel)="closeCtor()" (onOk)="deleteCtor()">
+  <p><strong>Удаление объекта {{ctorForDelete.name}}</strong></p>
+  <p>Уверен?</p>
+</i-modal>

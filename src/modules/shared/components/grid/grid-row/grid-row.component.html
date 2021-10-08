@@ -1,0 +1,13 @@
+<div class="table-body-row">
+  <div *ngFor="let field of itemAsArray" class="table-cell">
+    {{field}}
+  </div>
+  <div *ngIf="withEdit || withDelete" class="table-cell actions">
+    <button *ngIf="withEdit" class="icon" (click)="edit()">
+      <img src="/assets/icons/pencil-outline.svg" alt="EDIT">
+    </button>
+    <button *ngIf="withDelete" class="icon" (click)="delete()">
+      <img src="/assets/icons/close.svg" alt="CLOSE">
+    </button>
+  </div>
+</div>

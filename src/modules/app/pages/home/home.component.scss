@@ -41,46 +41,13 @@
     max-height: 100vh;
   }
 
-  // main {
-  //   position: fixed;
-  //   top: 0;
-  //   right: 0;
-  //   bottom: 0;
-  //   width: 480px;
-  //   margin: 80px 20px;
-
-  //   display: flex;
-  //   flex-direction: column;
-  // }
-
   .cab-link {
     position: fixed;
-    right: 0;
-    bottom: 0;
+    right: 16px;
+    bottom: 16px;
 
     img {
       width: 36px;
     }
   }
 }
-
-// :host {
-//   flex: 1 1 0;
-// }
-
-// .page-wrap {
-//   padding: 12px;
-// }
-
-// li {
-//   cursor: pointer;
-// }
-
-// .home {
-//   align-items: center;
-//   gap: 6px;
-
-//   img {
-//     width: 24px;
-//   }
-// }
