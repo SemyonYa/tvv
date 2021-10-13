@@ -19,8 +19,8 @@ export class HomeComponent implements OnInit {
     private mapService: MapService,
     private router: Router
   ) {
-    const objects = dataService.mock;
-    mapService.objects$.next(objects);
+    // const objects = dataService.mock;
+    // mapService.setObjects(objects);
   }
 
   ngOnInit() {

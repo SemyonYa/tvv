@@ -3,10 +3,11 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CtorItem } from '../../../../models/Ctor';
 import { Place } from '../../../../models/Place';
 import { ProjectRestService } from '../../../../services/api/project.rest.service';
-import { Coordinates, Region } from '../../../../services/map.service';
+import { Region } from '../../../../services/map.service';
 import { BreadcrumbsService } from '../../../../services/breadcrumbs.service';
 import { Image } from '../../../../models/Image';
 import { Project, ProjectType } from '../../../../models/Project';
+import { Coordinates } from 'src/models/MapObject';
 
 @Component({
   selector: 'tvv-project-form',
@@ -165,7 +166,6 @@ export class ProjectFormComponent implements OnInit {
   }
 
   updateProject(project: Project) {
-
     for (let key in project) {
       if (key !== 'items') {
         this.project[key] = project[key];

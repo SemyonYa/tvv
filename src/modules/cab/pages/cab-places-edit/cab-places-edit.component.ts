@@ -6,7 +6,7 @@ import { Image } from 'src/models/Image';
 import { Place } from 'src/models/Place';
 import { PlaceRestService } from 'src/services/api/place.rest.service';
 import { BreadcrumbsService } from 'src/services/breadcrumbs.service';
-import { Coordinates, Region } from 'src/services/map.service';
+import { Region } from 'src/services/map.service';
 
 @Component({
   selector: 'tvv-cab-places-edit',

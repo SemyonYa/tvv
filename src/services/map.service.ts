@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { MapObject } from 'src/models/MapObject';
 
 @Injectable({
   providedIn: 'root'
@@ -104,25 +105,12 @@ export class MapService {
   }
 
   setObjects(objects: MapObject[]) {
+    console.log("🚀 ~ file: map.service.ts ~ line 107 ~ MapService ~ setObjects ~ objects", objects)
     this.objects$.next(objects);
   }
 }
 
-export class MapObject {
-  id: number;
-  title: string;
-  type: MapObjectType;
-  coords: Coordinates;
-}
-
-export type MapObjectType = 'capital' | 'city' | 'place' | 'project';
-
 export type Region = 'Псковская область' | 'Орловская область' | 'Калужская область' | 'Тульская область' | 'Москва и Московская область' | 'Рязанская область' | 'Ярославская область' | 'Владимирская область' | 'Ивановская область' | 'Нижегородская область' | 'Республика Чувашия' | 'Республика Марий Эл' | 'Кировская область';
-
-export interface Coordinates {
-  x: number;
-  y: number;
-}
 
 export interface MapCameraPosition {
   xPercent: number;

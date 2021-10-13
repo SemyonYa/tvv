@@ -36,7 +36,7 @@
             </i-form-item>
         </div>
 
-        <tvv-map (onClick)="changeCoordinates($event)"></tvv-map>
+        <tvv-map (onClick)="onMapClick($event)"></tvv-map>
 
         <button *ngIf="!place?.id" type="submit" [disabled]="!valid" class="success">
             Save

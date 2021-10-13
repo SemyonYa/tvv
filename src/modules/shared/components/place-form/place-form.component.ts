@@ -3,9 +3,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CtorItem } from '../../../../models/Ctor';
 import { Place } from '../../../../models/Place';
 import { PlaceRestService } from '../../../../services/api/place.rest.service';
-import { Coordinates, Region } from '../../../../services/map.service';
+import { MapService, Region } from '../../../../services/map.service';
 import { BreadcrumbsService } from '../../../../services/breadcrumbs.service';
 import { Image } from '../../../../models/Image';
+import { Coordinates, MapObject } from 'src/models/MapObject';
 
 @Component({
   selector: 'tvv-place-form',
@@ -21,19 +22,16 @@ export class PlaceFormComponent implements OnInit {
   form: FormGroup;
 
   constructor(
-    // private placeRest: PlaceRestService,
-    private breadcrumbsService: BreadcrumbsService, 
-    // private activatedRoute: ActivatedRoute,
+    private breadcrumbsService: BreadcrumbsService,
+    private mapService: MapService
   ) { }
 
   ngOnInit(): void {
-    // const placeId = this.activatedRoute.snapshot.params.placeId;
-    // this.region = this.activatedRoute.parent.snapshot.paramMap.get('region') as Region;
+    this.mapService.setObjects([]);
     if (this.placeId) {
       this.placeRest.get(this.placeId)
         .subscribe(
           item => {
-            console.log("🚀 ~ file: cab-places-edit.component.ts ~ line 33 ~ CabPlacesEditComponent ~ ngOnInit ~ item", item)
             this.place = item;
             this.generateForm();
             this.valueChangesSubscription();
@@ -43,6 +41,7 @@ export class PlaceFormComponent implements OnInit {
                 { title: this.place.name, route: `` },
               ]
             );
+            this.mapService.setObjects([{ id: this.placeId, title: this.place.name, coordinates: { x: this.place.x, y: this.place.y }, type: 'place' }]);
           }
         );
     } else {
@@ -92,6 +91,15 @@ export class PlaceFormComponent implements OnInit {
 
   toggleActivity(value: boolean) {
     this.form.patchValue({ isActive: value })
+  }
+
+  onMapClick(coordinates: Coordinates) {
+    this.changeCoordinates(coordinates);
+    this.renderObject({ id: 0, title: this.form.get('name').value, coordinates, type: 'place' })
+  }
+
+  renderObject(object: MapObject) {
+    this.mapService.setObjects([object]);
   }
 
   changeCoordinates(coordinates: Coordinates) {

@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
-import { Coordinates, MapCameraPosition, MapObject, MapService, Region } from '../../../../services/map.service';
+import { MapCameraPosition, MapService, Region } from '../../../../services/map.service';
+import { Coordinates, MapObject } from '../../../../models/MapObject';
 
 @Component({
   selector: 'tvv-map',
@@ -17,6 +18,14 @@ export class MapComponent implements OnInit, AfterViewInit {
   viewboxHeight: number;
   realWidth: number;
   realHeight: number;
+
+  private colorForProjectType: { [key: string]: string } = {
+    'Школа': 'green',
+    'Дом культуры': 'blue',
+    'Детский сад': 'yellow',
+    'Больница': 'purple',
+    'Коммуникации': 'purple',
+  };
 
   constructor(
     private renderer: Renderer2,
@@ -37,15 +46,14 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.mapService.objects$
       .subscribe(
         items => {
+          console.log("🚀 ~ file: map.component.ts ~ line 41 ~ MapComponent ~ ngAfterViewInit ~ this.renderedObjects", this.renderedObjects)
           if (this.renderedObjects) {
             this.clear();
           }
           if (items) {
-            setTimeout(() => {
-              items.forEach(o => {
-                this.renderObject(o);
-              });
-            }, 2000);
+            items.forEach(o => {
+              this.renderObject(o);
+            });
           }
         }
       );
@@ -68,15 +76,16 @@ export class MapComponent implements OnInit, AfterViewInit {
 
   mapClick(e: PointerEvent) {
     let { offsetX, offsetY } = e;
-    const coords: Coordinates = { x: offsetX * this.viewboxWidth / this.realWidth, y: offsetY * this.viewboxHeight / this.realHeight };
-    this.onClick.emit(coords);
+    const coordinates: Coordinates = { x: offsetX * this.viewboxWidth / this.realWidth, y: offsetY * this.viewboxHeight / this.realHeight };
+    this.onClick.emit(coordinates);
 
-    // this.renderObject({ id: 12, title: 'On click object', coords, type: 'capital' });
+    // this.renderObject({ id: 12, title: 'On click object', coordinates, type: 'capital' });
   }
 
-  renderObject(obj: MapObject): any {
+  private renderObject(obj: MapObject): any {
     const gElem = this.renderer.createElement('g', 'svg');
     const textElem = this.renderer.createElement('text', 'svg');
+    this.renderer.setStyle(textElem, 'font-size', '10px')
     const innerText = this.renderer.createText(obj.title);
     this.renderer.appendChild(textElem, innerText);
     this.renderer.appendChild(gElem, textElem);
@@ -91,25 +100,39 @@ export class MapComponent implements OnInit, AfterViewInit {
         break;
 
       case 'place':
-
+        let circlePlaceElem = this.renderer.createElement('circle', 'svg');
+        this.renderer.setAttribute(circlePlaceElem, 'cx', '-3');
+        this.renderer.setAttribute(circlePlaceElem, 'cy', '3');
+        this.renderer.setAttribute(circlePlaceElem, 'r', '3');
+        this.renderer.appendChild(gElem, circlePlaceElem);
         break;
 
       case 'project':
-
+        let circleProjectElem = this.renderer.createElement('circle', 'svg');
+        this.renderer.setAttribute(circleProjectElem, 'cx', '-3');
+        this.renderer.setAttribute(circleProjectElem, 'cy', '3');
+        this.renderer.setAttribute(circleProjectElem, 'r', '3');
+        this.renderer.setStyle(circleProjectElem, 'fill', this.colorForProjectType[obj.projectType])
+        this.renderer.appendChild(gElem, circleProjectElem);
         break;
 
       default:
         break;
     }
 
-    this.renderer.setAttribute(gElem, 'transform', `matrix(1 0 0 1 ${obj.coords.x} ${obj.coords.y})`);
+    this.renderer.setAttribute(gElem, 'transform', `matrix(1 0 0 1 ${obj.coordinates.x} ${obj.coordinates.y})`);
     this.renderer.appendChild(this.map.nativeElement, gElem);
+
+    if (!this.renderedObjects) {
+      this.renderedObjects = [];
+    }
+    this.renderedObjects.push(gElem);
   }
 
-  clear() {
+  private clear() {
     this.renderedObjects.forEach(o => {
       this.renderer.removeChild(this.map.nativeElement, o);
-    })
+    });
   }
 }
 

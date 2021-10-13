@@ -1,9 +1,15 @@
-<div *ngIf="selectedRegion" class="page-wrap" @titleAnimation>
-    <h2>{{selectedRegion?.title}}</h2>
+<div *ngIf="region" class="page-wrap" @titleAnimation>
+    <h2>{{region}}</h2>
 
-    <ul *ngIf="objects">
-        <li *ngFor="let obj of objects">{{obj.title}}</li>
-    </ul>
+    <ng-container *ngIf="objects">
+
+        <ul *ngIf="objects.length > 0">
+            <li *ngFor="let obj of objects">{{obj.title}}</li>
+        </ul>
+
+        <p *ngIf="objects.length === 0">Нет объектов благотворительности</p>
+
+    </ng-container>
 
     <div *ngIf="!objects">Loading...</div>
 </div>
