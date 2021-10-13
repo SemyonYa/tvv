@@ -1,0 +1,7 @@
+<div *ngIf="text" class="wrap" @modalAnimation>
+    <img src="/assets/icons/done.svg" alt="DONE">
+    <span style="white-space: pre-line;" [innerHTML]="text"></span>
+    <button type="button" class="icon" (click)="hide()">
+        <img src="/assets/icons/close.svg" alt="CLOSE">
+    </button>
+</div>

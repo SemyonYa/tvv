@@ -1,0 +1,26 @@
+<div class="wrap">
+    <h3 class="row">
+        Select image
+        <div class="close-uploaded">
+            <span (click)="hide()" role="button">Close</span>
+        </div>
+        <!-- <button (click)="hide()" type="button" class="icon">
+            <img src="/assets/icons/close.svg" alt="CLOSE">
+        </button> -->
+    </h3>
+    <div *ngIf="images" class="thumbs">
+        <div *ngFor="let image of images" (click)="selectImage(image)"
+            [ngClass]="{'thumbs-item': true, 'selected': image === selectedImage}"
+            style="background-image: url({{image.thumb}});">
+            <img class="close" src="/assets/icons/close.svg" alt="CLOSE" (click)="showPopup($event, image.id)">
+        </div>
+    </div>
+
+    <div *ngIf="images?.length === 0" class="empty-list">
+        Empty list
+    </div>
+
+    <div *ngIf="!images" class="center">
+        <i-in-progress size="36px" margin="48px"></i-in-progress>
+    </div>
+</div>

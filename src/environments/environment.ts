@@ -5,6 +5,8 @@
 export const environment = {
   production: false,
   baseUrl: 'http://tvv-api',
+  /** Backend directory name (relatively @webroot) */
+  imagesDir: 'images'
 };
 
 /*

@@ -1,0 +1,6 @@
+<div id="popup-background" *ngIf="params" class="back" (click)="hide($event)">
+</div>
+<div *ngIf="params" class="wrap" [ngStyle]="{'left': params.x + 'px', 'top': params.y + 'px'}" @popupAnimation
+    (click)="call()">
+    {{params.msg}}
+</div>

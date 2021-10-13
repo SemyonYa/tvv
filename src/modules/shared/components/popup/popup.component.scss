@@ -1,0 +1,20 @@
+.back {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.48);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrap {
+  position: fixed;
+  padding: 2px 6px;
+  border-radius: 6px;
+  background-color: var(--color-back);
+  box-shadow: 0 0 12px 0 rgba(0, 0, 0, 0.06);
+  cursor: pointer;
+}

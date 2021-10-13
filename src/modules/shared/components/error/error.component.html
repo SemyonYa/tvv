@@ -1,7 +1,7 @@
-<div class="wrap">
+<div *ngIf="text" class="wrap" @modalAnimation>
   <img src="/assets/icons/bug.svg" alt="ERROR">
-  <ng-container *ngIf="text">
-    {{text}}
+  {{text}}
+  <!-- <ng-container *ngIf="text">
   </ng-container>
-  <ng-container *ngIf="!text">Что-то пошло не так</ng-container>
+  <ng-container *ngIf="!text">Что-то пошло не так</ng-container> -->
 </div>

@@ -1,0 +1,36 @@
+.row {
+  align-items: center;
+}
+
+.row select {
+  min-width: 200px;
+}
+
+.row button.add {
+  border: solid 2px var(--color-success);
+}
+
+.row button.remove {
+  border: solid 2px var(--color-danger);
+  margin-left: auto;
+}
+
+.ng-invalid {
+  border-color: var(--color-danger);
+}
+
+button.add-item {
+  margin-bottom: 12px;
+  border: solid 1px var(--color-blue);
+  align-self: center;
+  min-width: 30%;
+
+  img {
+      margin-left: 4px;
+  }
+}
+
+i-file-input {
+  display: block;
+  margin-bottom: 12px;
+}

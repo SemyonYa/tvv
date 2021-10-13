@@ -7,6 +7,9 @@ import { CabPlacesComponent } from './pages/cab-places/cab-places.component';
 import { CabPlacesListComponent } from './pages/cab-places-list/cab-places-list.component';
 import { CabPlacesAddComponent } from './pages/cab-places-add/cab-places-add.component';
 import { CabPlacesEditComponent } from './pages/cab-places-edit/cab-places-edit.component';
+import { CabPlaceComponent } from './pages/cab-place/cab-place.component';
+import { CabProjectsAddComponent } from './pages/cab-projects-add/cab-projects-add.component';
+import { CabProjectsEditComponent } from './pages/cab-projects-edit/cab-projects-edit.component';
 
 const routes: Routes = [
   // CAB
@@ -19,11 +22,21 @@ const routes: Routes = [
         path: ':region', component: CabPlacesComponent, children: [
           { path: '', component: CabPlacesListComponent, pathMatch: 'full' },
           { path: 'add', component: CabPlacesAddComponent },
-          { path: 'edit/:id', component: CabPlacesEditComponent },
+          { path: 'edit/:placeId', component: CabPlacesEditComponent },
         ]
       },
     ]
   },
+  {
+    path: 'places', component: CabComponent,
+    children: [
+      { path: ':placeId', component: CabPlaceComponent },
+      { path: ':placeId/add', component: CabProjectsAddComponent },
+      { path: ':placeId/edit/:projectId', component: CabProjectsEditComponent },
+    ]
+  },
+
+
   { path: 'enter', component: EnterComponent }
 ];
 

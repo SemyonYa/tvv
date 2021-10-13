@@ -12,16 +12,21 @@ export class GridComponent<T> {
   @Input() withDelete: boolean;
   @Input() fields: string[] = [];
   // @Input() exclude: string[] = [];
-  @Output() onEditItem = new EventEmitter<string>()
-  @Output() onDeleteItem = new EventEmitter<string>()
+  @Output() onEditItem = new EventEmitter<number>()
+  @Output() onDeleteItem = new EventEmitter<number>()
+  @Output() onItemDoubleClick = new EventEmitter<number>();
 
   itemsAsArrays: (string | number)[][];
 
-  editItem(id: string) {
+  editItem(id: number) {
     this.onEditItem.emit(id);
   }
 
-  deleteItem(id: string) {
+  deleteItem(id: number) {
     this.onDeleteItem.emit(id);
+  }
+
+  doubleClick(id: number) {
+    this.onItemDoubleClick.emit(id);
   }
 }

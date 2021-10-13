@@ -9,6 +9,9 @@ import { CabPlacesComponent } from './pages/cab-places/cab-places.component';
 import { CabPlacesListComponent } from './pages/cab-places-list/cab-places-list.component';
 import { CabPlacesAddComponent } from './pages/cab-places-add/cab-places-add.component';
 import { CabPlacesEditComponent } from './pages/cab-places-edit/cab-places-edit.component';
+import { CabPlaceComponent } from './pages/cab-place/cab-place.component';
+import { CabProjectsAddComponent } from './pages/cab-projects-add/cab-projects-add.component';
+import { CabProjectsEditComponent } from './pages/cab-projects-edit/cab-projects-edit.component';
 
 
 
@@ -21,6 +24,9 @@ import { CabPlacesEditComponent } from './pages/cab-places-edit/cab-places-edit.
     CabPlacesListComponent,
     CabPlacesAddComponent,
     CabPlacesEditComponent,
+    CabPlaceComponent,
+    CabProjectsAddComponent,
+    CabProjectsEditComponent,
   ],
   imports: [
     CommonModule,

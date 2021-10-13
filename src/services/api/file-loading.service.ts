@@ -17,7 +17,7 @@ export class FileLoadingService {
     return this.http.post<Image[]>(`${environment.baseUrl}/${environment.imagesDir}`, formData)
       .pipe(
         map(
-          (is: any[]) => is.map(i => new Image(i.id, i.name))
+          (is: any[]) => is.map(i => new Image(i.id, i.name)) 
         )
       );
   }

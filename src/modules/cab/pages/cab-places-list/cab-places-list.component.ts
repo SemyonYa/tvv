@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { titleAnimation } from 'src/animations/title.animation';
 import { BreadcrumbsService } from 'src/services/breadcrumbs.service';
 import { PlaceRestService } from 'src/services/api/place.rest.service';
 import { Region } from 'src/services/map.service';
 import { Place } from '../../../../models/Place';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'tvv-cab-places-list',
@@ -12,7 +13,7 @@ import { Place } from '../../../../models/Place';
   styleUrls: ['./cab-places-list.component.scss'],
   animations: [titleAnimation]
 })
-export class CabPlacesListComponent implements OnInit {
+export class CabPlacesListComponent implements OnInit, OnDestroy {
   region: Region;
 
   titles: string[] = ['ID', 'Наименование', 'Регион'];
@@ -21,6 +22,7 @@ export class CabPlacesListComponent implements OnInit {
   ctors: Place[];
   filteredCtors: Place[];
   ctorForDelete: Place;
+  subscription: Subscription;
 
   constructor(
     private placeRest: PlaceRestService,
@@ -39,22 +41,23 @@ export class CabPlacesListComponent implements OnInit {
     this.fetchData();
   }
 
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
   fetchData() {
-    this.ctors = null;
-    this.placeRest.getAll();
-    this.placeRest.list$
+    this.filteredCtors = null;
+    this.subscription = this.placeRest.getBy(this.region)
       .subscribe(
         items => {
           this.ctors = items;
-          console.log(this.ctors);
-
           this.filterCtors();
         }
       );
   }
 
   editCtor(id: number) {
-    this.router.navigateByUrl(`/position/edit/${id}`)
+    this.router.navigateByUrl(`/cab/regions/${this.region}/edit/${id}`)
   }
 
   onDelete(id: number) {
@@ -72,7 +75,7 @@ export class CabPlacesListComponent implements OnInit {
       );
   }
 
-  closeUser() {
+  closeCtor() {
     this.ctorForDelete = null;
   }
 
@@ -82,7 +85,6 @@ export class CabPlacesListComponent implements OnInit {
   }
 
   filterCtors() {
-    console.log(this.filteredCtors);
     this.filteredCtors = this.ctors
       ? this.ctors
         .filter(
@@ -94,9 +96,11 @@ export class CabPlacesListComponent implements OnInit {
           }
         )
       : null;
+  }
 
-    console.log(this.filteredCtors);
-
+  openItem(placeId: number) {
+    console.log('Open place', placeId);
+    this.router.navigateByUrl(`/cab/places/${placeId}`)
   }
 
 }

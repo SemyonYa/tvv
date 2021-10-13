@@ -8,6 +8,7 @@ export class UiService {
   // TODO: connect components at app.component.ts
   error$ = new BehaviorSubject<string>(null);
   success$ = new BehaviorSubject<string>(null);
+  popup$ = new BehaviorSubject<PopupParams>(null);
 
   constructor() { }
 
@@ -35,4 +36,19 @@ export class UiService {
   hideError() {
     this.error$.next(null);
   }
+
+  showPopup(params: PopupParams) {
+    this.popup$.next(params);
+  }
+
+  hidePopup() {
+    this.popup$.next(null);
+  }
+}
+
+export interface PopupParams {
+  x: number;
+  y: number;
+  msg: string;
+  callback: Function;
 }

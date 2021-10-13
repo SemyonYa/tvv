@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BreadcrumbsService } from 'src/services/breadcrumbs.service';
 import { DataService } from 'src/services/data.service';
 import { MapService, Region } from 'src/services/map.service';
 
@@ -13,17 +14,16 @@ export class CabRegionsComponent implements OnInit {
   error: string;
 
   constructor(
-    private dataService: DataService,
     private mapService: MapService,
+    private breadcrumbsService: BreadcrumbsService
   ) { }
 
   ngOnInit(): void {
-    setTimeout(() => {
-      this.regions = [];
-      for (let key in this.mapService.regions) {
-        this.regions.push(key as Region);
-      }
-    }, 1000);
+    this.breadcrumbsService.setItems([]);
+    this.regions = [];
+    for (let key in this.mapService.regions) {
+      this.regions.push(key as Region);
+    }
   }
 
 }

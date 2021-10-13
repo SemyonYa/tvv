@@ -9,7 +9,7 @@
     <div *ngIf="ctors" class="col">
       <i-search-input (onChange)="search($event)"></i-search-input>
       <i-grid *ngIf="filteredCtors" [items]="filteredCtors" [titles]="titles" [withEdit]="true" [withDelete]="true"
-        [fields]="fields" (onEditItem)="editCtor($event)" (onDeleteItem)="onDelete($event)"></i-grid>
+        [fields]="fields" (onItemDoubleClick)="openItem($event)" (onEditItem)="editCtor($event)" (onDeleteItem)="onDelete($event)"></i-grid>
     </div>
   </i-data>
 

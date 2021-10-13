@@ -7,14 +7,15 @@ import { EventEmitter } from '@angular/core';
   templateUrl: './grid-row.component.html',
   styleUrls: ['./grid-row.component.scss']
 })
-export class GridRowComponent<T extends { id: string }> implements OnInit {
+export class GridRowComponent<T extends { id: number }> implements OnInit {
   @Input() item: T;
   @Input() withEdit: boolean;
   @Input() withDelete: boolean;
   @Input() fields: string[] = [];
   // @Input() exclude: string[] = [];
-  @Output() onEdit = new EventEmitter<string>();
-  @Output() onDelete = new EventEmitter<string>();
+  @Output() onEdit = new EventEmitter<number>();
+  @Output() onDelete = new EventEmitter<number>();
+  @Output() onDoubleClick = new EventEmitter<number>();
 
   itemAsArray: (string | number)[] = [];
 
@@ -54,5 +55,9 @@ export class GridRowComponent<T extends { id: string }> implements OnInit {
 
   delete() {
     this.onDelete.emit(this.item.id);
+  }
+
+  doubleClick() {
+    this.onDoubleClick.emit(this.item.id);
   }
 }

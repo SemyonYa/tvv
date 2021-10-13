@@ -1,0 +1,27 @@
+<i-collapsible [expanded]="!!selectedImage">
+  <div class="thumbs-item preview" style="background-image: url({{selectedImage?.thumb}});"></div>
+</i-collapsible>
+<input type="text" class="none" placeholder="[empty]" readonly [value]="selectedImage ? selectedImage.name : ''">
+<div class="row">
+  <button type="button" (click)="showLibrary()">SELECT</button>
+  <button type="button" (click)="file.click()">
+    UPLOAD
+    <img src="/assets/icons/upload.svg" alt="UPLOAD">
+  </button>
+</div>
+<input #file type="file" multiple accept=".png, .jpg, .jpeg" (change)="onChange($event)">
+<!-- <i-collapsible [expanded]="!!images">
+  <div *ngIf="images" class="thumbs">
+    <div *ngFor="let image of images" (click)="selectImage(image)"
+      [ngClass]="{'thumbs-item': true, 'selected': image === selectedImage}"
+      style="background-image: url({{image.thumb}});"></div>
+  </div>
+  <div class="close-uploaded">
+    <span (click)="closeUploaded()" role="button">Close</span>
+  </div>
+</i-collapsible> -->
+
+<i-collapsible [expanded]="libraryShown">
+  <i-image-library-modal *ngIf="libraryShown" [selectedImage]="selectedImage" [projectId]="projectId" [period]="period" (onSelect)="selectImage($event)"
+    (onHide)="hideLibrary()"></i-image-library-modal>
+</i-collapsible> 

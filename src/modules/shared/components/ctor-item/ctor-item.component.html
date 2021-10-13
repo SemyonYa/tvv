@@ -1,0 +1,28 @@
+<form [formGroup]="form" class="col">
+    <div class="row">
+        <p>[Constructor item #{{index}}]</p>
+        <button type="button" class="icon remove" (click)="remove()">
+            <img src="/assets/icons/trash.svg" alt="REMOVE">
+        </button>
+    </div>
+    <i-form-item [form]="form" control="type">
+        <select formControlName="type">
+            <option *ngFor="let type of types" [value]="type">{{type}}</option>
+        </select>
+    </i-form-item>
+    <!-- IMAGE -->
+    <i-form-item *ngIf="selectedType === 'Image'" [form]="form" control="value">
+        <label>Value</label>
+        <input type="text" formControlName="value" class="non" readonly>
+        <i-image-input (onSelect)="selectThumb($event)"></i-image-input>
+    </i-form-item>
+    <!-- OTHER -->
+    <i-form-item *ngIf="selectedType !== 'Image'" [form]="form" control="value">
+        <label>Value</label>
+        <textarea type="text" formControlName="value" rows="4"></textarea>
+    </i-form-item>
+    <button type="button" (click)="add()" class="add-item">
+        Добавить
+        <img src="/assets/icons/plus-blue.svg" alt="ADD">
+    </button>
+</form>

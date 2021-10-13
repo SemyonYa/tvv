@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http/http'
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { BehaviorSubject, Observable, throwError } from 'rxjs'
 import { catchError, map } from 'rxjs/operators';
 import { environment } from '../../environments/environment'
@@ -64,9 +64,9 @@ export abstract class RestService<T extends { id: number }> {
 
   constructor(protected http: HttpClient, protected ui: UiService) { }
 
-  getAll(): void {
+  getAll(params: HttpParams = new HttpParams()): void {
     this.list$.next(null);
-    this.http.get<T[]>(this.url)
+    this.http.get<T[]>(this.url, { params })
       .pipe(
         map(
           (items: any[]): T[] => {

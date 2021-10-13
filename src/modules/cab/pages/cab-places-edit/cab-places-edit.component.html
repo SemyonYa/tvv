@@ -1,1 +1,83 @@
-<p>cab-places-edit works!</p>
+<tvv-place-form [placeRest]="placeRest" [region]="region" [placeId]="placeId"></tvv-place-form>
+
+<!-- <div *ngIf="form" class="wrap col">
+    <form [formGroup]="form" (ngSubmit)="submit()" class="col">
+        <div class="parent">
+            <i-form-item [form]="form" control="id">
+                <label>ID</label>
+                <input type="text" formControlName="id" readonly>
+            </i-form-item>
+            <i-form-item [form]="form" control="name">
+                <label>Наименование</label>
+                <input type="text" formControlName="name">
+            </i-form-item>
+            <i-form-item [form]="form" control="thumbId">
+                <label>Изображение</label>
+                <input type="text" formControlName="thumbId" class="none" readonly>
+                <i-image-input (onSelect)="selectThumb($event)"></i-file-input>
+            </i-form-item>
+            <i-form-item [form]="form" control="region" [ngClass]="{'none': !regions}">
+                <label>Регион</label>
+                <select formControlName="region">
+                    <option *ngFor="let region of regions" [value]="region">{{region}}</option>
+                </select>
+            </i-form-item>
+            <i-form-item [form]="form" control="isActive">
+                <label>Опубликовать</label>
+                <input type="checkbox" formControlName="isActive" class="none" readonly>
+                <i-toggle [initialValue]="true" (onToggle)="toggleActivity($event)"></i-toggle>
+            </i-form-item>
+            <i-form-item [form]="form" control="x">
+                <label>X</label>
+                <input type="number" formControlName="x" readonly>
+            </i-form-item>
+            <i-form-item [form]="form" control="y">
+                <label>Y</label>
+                <input type="number" formControlName="y" readonly>
+            </i-form-item>
+        </div>
+
+        <tvv-map (onClick)="changeCoordinates($event)"></tvv-map>
+
+        <button *ngIf="!place?.id" type="submit" [disabled]="!valid" class="success">
+            Save
+            <img src="/assets/icons/done.svg" alt="SAVE">
+        </button>
+
+        <fieldset *ngIf="place?.id" class="children">
+            <legend>place items</legend>
+            <i-collapsible [expanded]="!!place.items">
+                <ng-container *ngFor="let item of place.items, let index = index; let last = last">
+                    <i-ctor-item [item]="item" [index]="index" (onAdd)="addItem($event)"
+                        (onRemove)="removeItem($event)">
+                    </i-ctor-item>
+                    <hr *ngIf="!last">
+                </ng-container>
+            </i-collapsible>
+
+            <div *ngIf="place.items?.length === 0" class="empty-list">
+                Список пуст
+                <button type="button" (click)="addItem()" class="add-item">
+                    Добавить
+                    <img src="/assets/icons/plus-blue.svg" alt="ADD">
+                </button>
+            </div>
+
+            <ng-container *ngIf="!place.items" [ngTemplateOutlet]="inProgress"></ng-container>
+        </fieldset>
+
+        <button *ngIf="place?.id" type="submit" [disabled]="!valid" class="success">
+            Save
+            <img src="/assets/icons/done.svg" alt="SAVE">
+        </button>
+    </form>
+</div>
+
+<ng-container *ngIf="!form" [ngTemplateOutlet]="inProgress"></ng-container>
+
+
+<ng-template #inProgress>
+    <div class="center">
+        <i-in-progress size="36px" margin="48px"></i-in-progress>
+    </div>
+</ng-template> -->

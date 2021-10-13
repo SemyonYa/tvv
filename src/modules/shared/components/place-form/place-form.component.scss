@@ -1,0 +1,36 @@
+.wrap {
+  h1 {
+    font-weight: 200;
+  }
+  form {
+    .parent {
+      max-width: 400px;
+    }
+
+    fieldset.children {
+      border: solid 1px var(--color-grey-light);
+      border-radius: 8px;
+      min-height: 100px;
+
+      legend {
+        padding: 0 10px;
+        font-size: 16px;
+      }
+
+      hr {
+        margin: 20px 30%;
+      }
+    }
+
+    & > button {
+      align-self: flex-start;
+    }
+
+    button.add-item {
+      margin-top: 12px;
+      border: solid 1px var(--color-blue);
+      align-self: center;
+      min-width: 30%;
+    }
+  }
+}

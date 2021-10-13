@@ -1,0 +1,102 @@
+<div *ngIf="form" class="wrap col">
+    <!-- <h1>{{place.name}}</h1> -->
+    <form [formGroup]="form" (ngSubmit)="submit()" class="col">
+        <div class="parent">
+            <i-form-item [form]="form" control="id">
+                <label>ID</label>
+                <input type="text" formControlName="id" readonly>
+            </i-form-item>
+            <i-form-item [form]="form" control="name">
+                <label>Наименование</label>
+                <textarea type="text" formControlName="name" rows="4"></textarea>
+            </i-form-item>
+            <i-form-item [form]="form" control="period">
+                <label>Период проведения работ</label>
+                <input type="text" formControlName="period">
+            </i-form-item>
+            <i-form-item [form]="form" control="costs">
+                <label>Затраты, в млн. руб.</label>
+                <input type="number" formControlName="costs">
+            </i-form-item>
+            <i-form-item [form]="form" control="people">
+                <label>Люди</label>
+                <input type="text" formControlName="people">
+            </i-form-item>
+            <i-form-item [form]="form" control="type" [ngClass]="{'none': !types}">
+                <label>Тип</label>
+                <select formControlName="type">
+                    <option *ngFor="let type of types" [value]="type">{{type}}</option>
+                </select>
+            </i-form-item>
+
+            <i-form-item [form]="form" control="placeId" [ngClass]="{'none': !places}">
+                <label>Населенный пункт</label>
+                <select formControlName="placeId">
+                    <option *ngFor="let place of places" [value]="place">{{place}}</option>
+                </select>
+            </i-form-item>
+            <i-form-item [form]="form" control="placeId" [ngClass]="{'none': !!places}">
+                <label>Населенный пункт</label>
+                <input type="number" formControlName="placeId" readonly>
+            </i-form-item>
+
+            <i-form-item *ngIf="project?.id" [form]="form" control="thumbId">
+                <label>Фото до</label>
+                <input type="text" formControlName="thumbId" class="none" readonly>
+                <i-image-input [projectId]="projectId" period="before" (onSelect)="selectThumb($event)"></i-image-input>
+            </i-form-item>
+            <i-form-item *ngIf="project?.id" [form]="form" control="thumbId">
+                <label>Фото после</label>
+                <input type="text" formControlName="thumbId" class="none" readonly>
+                <i-image-input [projectId]="projectId" period="after" (onSelect)="selectThumb($event)"></i-image-input>
+            </i-form-item>
+
+            <i-form-item [form]="form" control="isActive">
+                <label>Опубликовать</label>
+                <input type="checkbox" formControlName="isActive" class="none" readonly>
+                <i-toggle [initialValue]="true" (onToggle)="toggleActivity($event)"></i-toggle>
+            </i-form-item>
+        </div>
+
+        <button *ngIf="!project?.id" type="submit" [disabled]="!valid" class="success">
+            Save
+            <img src="/assets/icons/done.svg" alt="SAVE">
+        </button>
+
+        <fieldset *ngIf="project?.id" class="children">
+            <legend>project items</legend>
+            <i-collapsible [expanded]="!!project?.items">
+                <ng-container *ngFor="let item of project.items, let index = index; let last = last">
+                    <i-ctor-item [item]="item" [index]="index" (onAdd)="addItem($event)"
+                        (onRemove)="removeItem($event)">
+                    </i-ctor-item>
+                    <hr *ngIf="!last">
+                </ng-container>
+            </i-collapsible>
+
+            <div *ngIf="project.items?.length === 0" class="empty-list">
+                Список пуст
+                <button type="button" (click)="addItem()" class="add-item">
+                    Добавить
+                    <img src="/assets/icons/plus-blue.svg" alt="ADD">
+                </button>
+            </div>
+
+            <ng-container *ngIf="!project.items" [ngTemplateOutlet]="inProgress"></ng-container>
+        </fieldset>
+
+        <button *ngIf="project?.id" type="submit" [disabled]="!valid" class="success">
+            Save
+            <img src="/assets/icons/done.svg" alt="SAVE">
+        </button>
+    </form>
+</div>
+
+<ng-container *ngIf="!form" [ngTemplateOutlet]="inProgress"></ng-container>
+
+
+<ng-template #inProgress>
+    <div class="center">
+        <i-in-progress size="36px" margin="48px"></i-in-progress>
+    </div>
+</ng-template>
