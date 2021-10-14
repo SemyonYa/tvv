@@ -41,7 +41,7 @@ export class PlaceFormComponent implements OnInit {
                 { title: this.place.name, route: `` },
               ]
             );
-            this.mapService.setObjects([{ id: this.placeId, title: this.place.name, coordinates: { x: this.place.x, y: this.place.y }, type: 'place' }]);
+            this.mapService.setObjects([{ id: this.placeId, title: this.place.name, coordinates: { x: this.place.x, y: this.place.y }, region: this.place.region }]);
           }
         );
     } else {
@@ -95,7 +95,7 @@ export class PlaceFormComponent implements OnInit {
 
   onMapClick(coordinates: Coordinates) {
     this.changeCoordinates(coordinates);
-    this.renderObject({ id: 0, title: this.form.get('name').value, coordinates, type: 'place' })
+    this.renderObject({ id: 0, title: this.form.get('name').value, coordinates, region: this.place.region })
   }
 
   renderObject(object: MapObject) {

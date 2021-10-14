@@ -22,25 +22,19 @@ g.group {
   circle {
     fill-rule: evenodd;
     clip-rule: evenodd;
-    fill: #FF3131;
+    fill: var(--color-red);
     transition: .3s;
   }
 
   text {
     font-size: 11px;
     fill: var(--color-grey-text);
-    transition: .3s;
+    transition: 1s;
   }
 
   &:hover {
     path {
       fill: var(--color-grey);
-    }
-
-    circle {}
-
-    text {
-      // fill: var(--color-back);
     }
   }
 
@@ -50,18 +44,77 @@ g.group {
       fill: var(--color-grey-light);
     }
 
-    circle {}
-
-    text {}
+    text {
+      fill: rgba(255, 255, 255, .24);
+    }
   }
 
   &.inactive {
     path {
       fill: var(--color-back);
     }
-
-    circle {}
-
-    text {}
   }
 }
+
+g.place {
+  cursor: pointer;
+
+  circle {
+    fill: var(--color-grey);
+    animation: in .3s ease-in-out;
+    transition: .3s;
+  }
+
+  text {
+    font-size: 10px;
+    fill: var(--color-grey-text);
+    animation: in .3s ease-in-out;
+    transition: .3s;
+  }
+
+}
+
+
+
+g.group.active~g.place {
+  text {
+    fill: var(--color-blue);
+    font-size: 6px;
+  }
+}
+
+@keyframes in {
+  from {
+    opacity: 0;
+    // top: 40px;
+    transform: translateX(3px);
+  }
+
+  to {
+    opacity: 1;
+    // top: 0px;
+    // transform: translateY(0px);
+  }
+}
+
+// @for $i from 1 through 20 {
+//   g.place:nth-of-type($i) text {
+//     animation-duration: (0.1 * $i)s;
+//   }
+
+//   // .columns-#{$i} {
+//   //     width: (100% / $i);
+//   // }
+// }
+
+// g.group.active~g.place:nth-of-type(1) text {
+//   fill: red;
+// }
+// g.place {
+//   &:nth-child(3) {
+//     text {
+//       fill: var(--color-red);
+//       font-size: 6px;
+//     }
+//   }
+// }

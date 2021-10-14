@@ -1,0 +1,23 @@
+<div *ngIf="place" class="page-wrap" @titleAnimation>
+  <h2>{{place.name}}</h2>
+
+  <div class="ctor">
+    <ng-container *ngFor="let item of place.items">
+      <p class="text"> {{item.value}} </p>
+      <!-- <p *ngIf="item.type === 'Text'" class="text"> {{item.value}} </p> -->
+    </ng-container>
+  </div>
+
+  <h4>Проекты</h4>
+
+  <ul *ngIf="place.projects.length > 0" class="projects">
+    <li *ngFor="let project of place.projects">
+      <a [routerLink]="['/map/' + place.region + '/' + place.id + '/' + project.id]">{{project.name}}</a>
+    </li>
+  </ul>
+
+  <p *ngIf="place.projects.length === 0">Нет объектов благотворительности</p>
+
+
+</div>
+<div *ngIf="!place">Loading...</div>

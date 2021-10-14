@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, ElementRef, EventEmitter, OnInit, Output, Renderer2, ViewChild } from '@angular/core';
 import { MapCameraPosition, MapService, Region } from '../../../../services/map.service';
 import { Coordinates, MapObject } from '../../../../models/MapObject';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tvv-map',
@@ -20,16 +21,17 @@ export class MapComponent implements OnInit, AfterViewInit {
   realHeight: number;
 
   private colorForProjectType: { [key: string]: string } = {
-    'Школа': 'green',
-    'Дом культуры': 'blue',
-    'Детский сад': 'yellow',
-    'Больница': 'purple',
-    'Коммуникации': 'purple',
+    'Школа': '#00AAC6',
+    'Дом культуры': '#4a9340',
+    'Детский сад': '#B7009D',
+    'Больница': '#FFAE0D',
+    'Коммуникации': '#d5b17f',
   };
 
   constructor(
     private renderer: Renderer2,
-    private mapService: MapService
+    private mapService: MapService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -46,7 +48,6 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.mapService.objects$
       .subscribe(
         items => {
-          console.log("🚀 ~ file: map.component.ts ~ line 41 ~ MapComponent ~ ngAfterViewInit ~ this.renderedObjects", this.renderedObjects)
           if (this.renderedObjects) {
             this.clear();
           }
@@ -83,44 +84,84 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   private renderObject(obj: MapObject): any {
+    console.log(obj);
+
     const gElem = this.renderer.createElement('g', 'svg');
     const textElem = this.renderer.createElement('text', 'svg');
-    this.renderer.setStyle(textElem, 'font-size', '10px')
     const innerText = this.renderer.createText(obj.title);
     this.renderer.appendChild(textElem, innerText);
     this.renderer.appendChild(gElem, textElem);
 
-    switch (obj.type) {
-      case 'capital':
+    this.renderer.addClass(gElem, 'place');
 
-        break;
-
-      case 'city':
-
-        break;
-
-      case 'place':
-        let circlePlaceElem = this.renderer.createElement('circle', 'svg');
-        this.renderer.setAttribute(circlePlaceElem, 'cx', '-3');
-        this.renderer.setAttribute(circlePlaceElem, 'cy', '3');
-        this.renderer.setAttribute(circlePlaceElem, 'r', '3');
-        this.renderer.appendChild(gElem, circlePlaceElem);
-        break;
-
-      case 'project':
+    if (obj.projects?.length > 0) {
+      obj.projects.forEach((project, index) => {
         let circleProjectElem = this.renderer.createElement('circle', 'svg');
-        this.renderer.setAttribute(circleProjectElem, 'cx', '-3');
+        this.renderer.setAttribute(circleProjectElem, 'cx', `${3 * index + 10}`);
         this.renderer.setAttribute(circleProjectElem, 'cy', '3');
-        this.renderer.setAttribute(circleProjectElem, 'r', '3');
-        this.renderer.setStyle(circleProjectElem, 'fill', this.colorForProjectType[obj.projectType])
+        this.renderer.setAttribute(circleProjectElem, 'r', '1.5');
+        this.renderer.setAttribute(circleProjectElem, 'title', project.type);
+        this.renderer.setStyle(circleProjectElem, 'fill', this.colorForProjectType[project.type])
         this.renderer.appendChild(gElem, circleProjectElem);
-        break;
+      });
 
-      default:
-        break;
+      this.renderer.listen(gElem, 'click', () => {
+        console.log(obj);
+        this.router.navigateByUrl(`/map/${obj.region}/${obj.id}`)
+      });
+    } else {
+      let circlePlaceElem = this.renderer.createElement('circle', 'svg');
+      this.renderer.setAttribute(circlePlaceElem, 'cx', '10');
+      this.renderer.setAttribute(circlePlaceElem, 'cy', '4');
+      this.renderer.setAttribute(circlePlaceElem, 'r', '3');
+      this.renderer.appendChild(gElem, circlePlaceElem);
     }
 
-    this.renderer.setAttribute(gElem, 'transform', `matrix(1 0 0 1 ${obj.coordinates.x} ${obj.coordinates.y})`);
+    // switch (obj.type) {
+    //   case 'capital':
+
+    //     break;
+
+    //   case 'city':
+
+    //     break;
+
+    //   case 'place':
+
+    //     this.renderer.addClass(gElem, 'place');
+
+    //     if (obj.projects?.length > 0) {
+    //       obj.projects.forEach((p, index) => {
+    //         let circleProjectElem = this.renderer.createElement('circle', 'svg');
+    //         this.renderer.setAttribute(circleProjectElem, 'cx', `${3 * index + 10}`);
+    //         this.renderer.setAttribute(circleProjectElem, 'cy', '3');
+    //         this.renderer.setAttribute(circleProjectElem, 'r', '2');
+    //         this.renderer.setAttribute(circleProjectElem, 'title', p.type);
+    //         this.renderer.setStyle(circleProjectElem, 'fill', this.colorForProjectType[p.type])
+    //         this.renderer.appendChild(gElem, circleProjectElem);
+    //       });
+
+    //       this.renderer.listen(gElem, 'click', () => {
+    //         console.log(obj);
+    //         this.router.navigateByUrl(`/map/${obj.}`)
+    //       });
+    //     } else {
+    //       let circlePlaceElem = this.renderer.createElement('circle', 'svg');
+    //       this.renderer.setAttribute(circlePlaceElem, 'cx', '10');
+    //       this.renderer.setAttribute(circlePlaceElem, 'cy', '4');
+    //       this.renderer.setAttribute(circlePlaceElem, 'r', '3');
+    //       this.renderer.appendChild(gElem, circlePlaceElem);
+    //     }
+    //     break;
+
+    //   case 'project':
+    //     break;
+
+    //   default:
+    //     break;
+    // }
+
+    this.renderer.setAttribute(gElem, 'transform', `matrix(1 0 0 1 ${obj.coordinates.x - 5} ${obj.coordinates.y - 5})`);
     this.renderer.appendChild(this.map.nativeElement, gElem);
 
     if (!this.renderedObjects) {

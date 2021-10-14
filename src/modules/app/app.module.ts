@@ -10,13 +10,17 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './pages/home/home.component';
 import { RegionComponent } from './pages/region/region.component';
 import { HelloComponent } from './pages/hello/hello.component';
+import { PlaceComponent } from './pages/place/place.component';
+import { ProjectComponent } from './pages/project/project.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     RegionComponent,
-    HelloComponent
+    HelloComponent,
+    PlaceComponent,
+    ProjectComponent
   ],
   imports: [
     BrowserModule,

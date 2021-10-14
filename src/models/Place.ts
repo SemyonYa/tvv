@@ -1,3 +1,4 @@
+import { Region } from "src/services/map.service";
 import { CtorItem } from "./Ctor";
 import { Project } from './Project';
 
@@ -6,7 +7,7 @@ export class Place {
     name: string;
     thumbId?: number;
     isActive: boolean;
-    region: string;
+    region: Region;
     x: number;
     y: number;
 

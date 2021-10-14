@@ -1,0 +1,13 @@
+<div *ngIf="project" class="page-wrap" @titleAnimation>
+  <h2>{{project.name}}</h2>
+
+  <div class="ctor">
+    <ng-container *ngFor="let item of project?.items">
+      <p class="text"> {{item.value}} </p>
+      <!-- <p *ngIf="item.type === 'Text'" class="text"> {{item.value}} </p> -->
+    </ng-container>
+  </div>
+
+
+</div>
+<div *ngIf="!project">Loading...</div>
