@@ -3,8 +3,16 @@
 
   <div class="ctor">
     <ng-container *ngFor="let item of place.items">
-      <p class="text"> {{item.value}} </p>
-      <!-- <p *ngIf="item.type === 'Text'" class="text"> {{item.value}} </p> -->
+      <!-- <p class="text"> {{item.value}} </p> -->
+      <h2 *ngIf="item.type === CtorItemType.H1">{{item.value}}</h2>
+      <h3 *ngIf="item.type === CtorItemType.H2">{{item.value}}</h3>
+      <p *ngIf="item.type === CtorItemType.Text" class="ctor-text"> {{item.value}} </p>
+      <img [src]="item.value" *ngIf="item.type === CtorItemType.Image" class="ctor-image">
+      <p *ngIf="item.type === CtorItemType.Comment" class="ctor-comment"> {{item.value}} </p>
+      <ul *ngIf="item.type === CtorItemType.List" class="ctor-list">
+        <li *ngFor="let li of item.value.split('\n')"> {{li}} </li>
+      </ul>
+
     </ng-container>
   </div>
 
@@ -17,7 +25,6 @@
   </ul>
 
   <p *ngIf="place.projects.length === 0">Нет объектов благотворительности</p>
-
 
 </div>
 <div *ngIf="!place">Loading...</div>

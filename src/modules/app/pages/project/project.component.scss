@@ -1,0 +1,19 @@
+.page-wrap {
+  padding: 40px;
+  max-width: calc(100% - 40px);
+
+  &::before, &::after {
+      width: calc(100% - 40px);
+  }
+}
+
+
+.close-btn {
+  position: fixed;
+  top: 40px;
+  right: 40px;
+  width: 40px;
+  aspect-ratio: 1;
+  padding: 8px;
+  cursor: pointer;
+}

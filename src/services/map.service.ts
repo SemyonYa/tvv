@@ -79,10 +79,16 @@ export class MapService {
   };
 
   selectRegion(region: Region = null) {
-    if (this.selectedRegion$.value?.title != region) {
+    region = region ? decodeURI(region) as Region : null;
+    if (this.selectedRegion$.value?.title !== region) {
+      console.log(this.selectedRegion$.value?.title);
+
       if (region) {
+        console.log('if', region);
+
         this.selectedRegion$.next({ title: region, cameraPosition: this.regions[region.toString()] });
       } else {
+        console.log('else', region);
         this.selectedRegion$.next({ title: null, cameraPosition: { scale: 1, xPercent: 0, yPercent: 0 } });
       }
 
@@ -105,7 +111,7 @@ export class MapService {
   }
 
   setObjects(objects: MapObject[]) {
-    console.log("🚀 ~ file: map.service.ts ~ line 107 ~ MapService ~ setObjects ~ objects", objects)
+    // console.log("🚀 ~ file: map.service.ts ~ line 107 ~ MapService ~ setObjects ~ objects", objects)
     this.objects$.next(objects);
   }
 }

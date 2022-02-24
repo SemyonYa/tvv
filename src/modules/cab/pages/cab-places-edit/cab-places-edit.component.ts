@@ -27,21 +27,6 @@ export class CabPlacesEditComponent implements OnInit {
   ngOnInit(): void {
     this.placeId = this.activatedRoute.snapshot.params.placeId;
     this.region = this.activatedRoute.parent.snapshot.paramMap.get('region') as Region;
-    // this.placeRest.get(placeId)
-    //   .subscribe(
-    //     item => {
-    //       console.log("🚀 ~ file: cab-places-edit.component.ts ~ line 33 ~ CabPlacesEditComponent ~ ngOnInit ~ item", item)
-    //       this.place = item;
-    //       this.generateForm();
-    //       this.valueChangesSubscription();
-    //       this.breadcrumbsService.setItems(
-    //         [
-    //           { title: this.region, route: `/cab/regions/${this.region}` },
-    //           { title: this.place.name, route: `` },
-    //         ]
-    //       );
-    //     }
-    //   )
   }
 
   // get valid(): boolean {

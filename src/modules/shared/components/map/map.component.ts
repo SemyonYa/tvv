@@ -62,8 +62,8 @@ export class MapComponent implements OnInit, AfterViewInit {
     this.mapService.selectedRegion$
       .subscribe(
         item => {
-          if (item) {
-            this.renderer.setStyle(this.map.nativeElement, 'transform', `scale(${item.cameraPosition.scale}) translateX(${item.cameraPosition.xPercent}%) translateY(${item.cameraPosition.yPercent}%)`);
+          if (item) {           
+            this.renderer.setStyle(this.map.nativeElement, 'transform', `scale(${item.cameraPosition?.scale ?? 1}) translateX(${item.cameraPosition?.xPercent ?? 0}%) translateY(${item.cameraPosition?.yPercent ?? 0}%)`);
           }
         }
       );
@@ -84,7 +84,6 @@ export class MapComponent implements OnInit, AfterViewInit {
   }
 
   private renderObject(obj: MapObject): any {
-    console.log(obj);
 
     const gElem = this.renderer.createElement('g', 'svg');
     const textElem = this.renderer.createElement('text', 'svg');
@@ -106,7 +105,6 @@ export class MapComponent implements OnInit, AfterViewInit {
       });
 
       this.renderer.listen(gElem, 'click', () => {
-        console.log(obj);
         this.router.navigateByUrl(`/map/${obj.region}/${obj.id}`)
       });
     } else {

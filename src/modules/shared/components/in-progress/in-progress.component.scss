@@ -1,18 +1,25 @@
 .wrap {
-    display: inline-block;
-    box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
 
-    img {
-        animation: rotation 1s infinite linear;
+  svg {
+    aspect-ratio: 1;
+    animation: rotation 1s infinite linear;
+
+    circle {
+      fill: var(--color-blue);
     }
+  }
 }
 
 @keyframes rotation {
-    from {
-        transform: rotate(0deg);
-    }
+  from {
+    transform: rotate(0deg);
+  }
 
-    to {
-        transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
 }
