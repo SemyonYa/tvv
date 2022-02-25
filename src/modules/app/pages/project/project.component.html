@@ -8,8 +8,11 @@
     </ng-container>
   </div>
 
-
+  <a [routerLink]="['before']"> BEFORE </a>
+  <a [routerLink]="['after']"> AFTER </a>
 </div>
 <div *ngIf="!project">Loading...</div>
 
 <img src="/assets/icons/close.svg" alt="CLOSE" class="close-btn" (click)="close()">
+
+<router-outlet></router-outlet>

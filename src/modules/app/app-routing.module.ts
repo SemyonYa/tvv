@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+// import { Routes, RouterModule } from '@angular/router';
 import { HelloComponent } from './pages/hello/hello.component';
 import { HomeComponent } from './pages/home/home.component';
 import { PlaceComponent } from './pages/place/place.component';
+import { ProjectGaleryComponent } from './pages/project-galery/project-galery.component';
 import { ProjectComponent } from './pages/project/project.component';
 import { RegionComponent } from './pages/region/region.component';
 
@@ -12,8 +14,14 @@ const routes: Routes = [
     path: 'map', component: HomeComponent, children: [
       { path: '', component: HelloComponent, pathMatch: 'full' },
       { path: ':region', component: RegionComponent, pathMatch: 'full' },
-      { path: ':region/:placeId', component: PlaceComponent, pathMatch: 'full' },
-      { path: ':region/:placeId/:projectId', component: ProjectComponent, pathMatch: 'full' },
+      { path: ':region/:placeId', component: PlaceComponent },
+      {
+        path: ':region/:placeId/:projectId', component: ProjectComponent,
+        children: [
+          { path: 'before', component: ProjectGaleryComponent },
+          { path: 'after', component: ProjectGaleryComponent },
+        ]
+      },
     ]
   },
 

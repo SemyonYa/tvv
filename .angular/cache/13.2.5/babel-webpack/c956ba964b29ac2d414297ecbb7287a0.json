@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Place {\n  constructor() {\n    this.isActive = true;\n    this.items = [];\n    this.projects = [];\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}

@@ -1,0 +1,23 @@
+@import "~swiper/css";
+@import "~swiper/css/navigation";
+@import "~swiper/css/pagination";
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: white;
+}
+
+.swiper-pagination-bullet {
+  background-color: var(--color-grey-text-light);
+  opacity: 1;
+  &-active {
+    background-color: white;
+  }
+}
+
+// .swiper-slide {
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   vertical-align: middle;
+// }
