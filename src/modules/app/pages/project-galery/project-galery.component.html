@@ -1,0 +1,11 @@
+<div class="wrap col">
+  <h4>[TITLE]</h4>
+  <swiper [config]="config">
+    <!-- <ng-template *ngIf="!product.images?.length" swiperSlide>
+      <img src="/assets/images/north.jpg" alt="">
+    </ng-template> -->
+    <ng-template *ngFor="let image of images" swiperSlide>
+      <img [src]="image.large" alt="">
+    </ng-template>
+  </swiper>
+</div>

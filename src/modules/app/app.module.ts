@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { SwiperModule } from 'swiper/angular';
 
 import { AppRoutingModule } from './app-routing.module';
 import { SharedModule } from '../shared/shared.module';
@@ -12,6 +13,7 @@ import { RegionComponent } from './pages/region/region.component';
 import { HelloComponent } from './pages/hello/hello.component';
 import { PlaceComponent } from './pages/place/place.component';
 import { ProjectComponent } from './pages/project/project.component';
+import { ProjectGaleryComponent } from './pages/project-galery/project-galery.component';
 
 @NgModule({
   declarations: [
@@ -20,12 +22,14 @@ import { ProjectComponent } from './pages/project/project.component';
     RegionComponent,
     HelloComponent,
     PlaceComponent,
-    ProjectComponent
+    ProjectComponent,
+    ProjectGaleryComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    SwiperModule,
     AppRoutingModule,
     SharedModule,
   ],
